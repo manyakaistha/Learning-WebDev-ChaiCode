@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Forms Examples</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        input[type="checkbox"], input[type="radio"] {
+            width: auto;
+            margin-right: 10px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .required:after {
+            content: " *";
+            color: red;
+        }
+        .form-section {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+    </style>
+</head>
+<body>
+    <h1>HTML Forms Examples</h1>
+    
+    <!-- Basic Form Example -->
+    <section class="form-section">
+        <h2>Basic Form Elements</h2>
+        <div class="form-container">
+            <form action="#" method="post">
+                <div class="form-group">
+                    <label for="name" class="required">Name</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email" class="required">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password">
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="4" placeholder="Enter your message"></textarea>
+                </div>
+                
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </section>
+    
+    <!-- Different Input Types -->
+    <section class="form-section">
+        <h2>Different Input Types</h2>
+        <div class="form-container">
+            <form action="#" method="post">
+                <div class="form-group">
+                    <label for="number">Number</label>
+                    <input type="number" id="number" name="number" min="0" max="100" step="1" value="50">
+                </div>
+                
+                <div class="form-group">
+                    <label for="date">Date</label>
+                    <input type="date" id="date" name="date">
+                </div>
+                
+                <div class="form-group">
+                    <label for="color">Color</label>
+                    <input type="color" id="color" name="color" value="#4CAF50">
+                </div>
+                
+                <div class="form-group">
+                    <label for="range">Range</label>
+                    <input type="range" id="range" name="range" min="0" max="100" value="50">
+                </div>
+                
+                <div class="form-group">
+                    <label>File Upload</label>
+                    <input type="file" id="file" name="file">
+                </div>
+                
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </section>
+    
+    <!-- Select and Radio Buttons -->
+    <section class="form-section">
+        <h2>Select Dropdowns and Radio Buttons</h2>
+        <div class="form-container">
+            <form action="#" method="post">
+                <div class="form-group">
+                    <label for="country">Country</label>
+                    <select id="country" name="country">
+                        <option value="">Select a country</option>
+                        <option value="us">United States</option>
+                        <option value="ca">Canada</option>
+                        <option value="uk">United Kingdom</option>
+                        <option value="au">Australia</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Gender</label>
+                    <div>
+                        <input type="radio" id="male" name="gender" value="male">
+                        <label for="male" style="display: inline;">Male</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="female" name="gender" value="female">
+                        <label for="female" style="display: inline;">Female</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="other" name="gender" value="other">
+                        <label for="other" style="display: inline;">Other</label>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Interests</label>
+                    <div>
+                        <input type="checkbox" id="coding" name="interests" value="coding">
+                        <label for="coding" style="display: inline;">Coding</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="design" name="interests" value="design">
+                        <label for="design" style="display: inline;">Design</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="music" name="interests" value="music">
+                        <label for="music" style="display: inline;">Music</label>
+                    </div>
+                </div>
+                
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </section>
+    
+    <!-- Form Validation -->
+    <section class="form-section">
+        <h2>Form Validation</h2>
+        <div class="form-container">
+            <form action="#" method="post" id="validation-form">
+                <div class="form-group">
+                    <label for="username" class="required">Username</label>
+                    <input type="text" id="username" name="username" required minlength="3" maxlength="15" pattern="[A-Za-z0-9]+" title="Username can only contain letters and numbers">
+                    <small>Username must be 3-15 characters and contain only letters and numbers</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email2" class="required">Email</label>
+                    <input type="email" id="email2" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password2" class="required">Password</label>
+                    <input type="password" id="password2" name="password" required minlength="8" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Password must contain at least one number, one uppercase and lowercase letter, and be at least 8 characters long">
+                    <small>Password must be at least 8 characters with numbers, uppercase and lowercase letters</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirm-password" class="required">Confirm Password</label>
+                    <input type="password" id="confirm-password" name="confirm-password" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="age" class="required">Age</label>
+                    <input type="number" id="age" name="age" required min="18" max="120">
+                    <small>You must be at least 18 years old</small>
+                </div>
+                
+                <div class="form-group">
+                    <input type="checkbox" id="terms" name="terms" required>
+                    <label for="terms" style="display: inline;" class="required">I agree to the terms and conditions</label>
+                </div>
+                
+                <button type="submit">Register</button>
+            </form>
+        </div>
+    </section>
+    
+    <!-- Form with Fieldsets -->
+    <section class="form-section">
+        <h2>Form with Fieldsets</h2>
+        <div class="form-container">
+            <form action="#" method="post">
+                <fieldset>
+                    <legend>Personal Information</legend>
+                    
+                    <div class="form-group">
+                        <label for="first-name">First Name</label>
+                        <input type="text" id="first-name" name="first-name">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="last-name">Last Name</label>
+                        <input type="text" id="last-name" name="last-name">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="dob">Date of Birth</label>
+                        <input type="date" id="dob" name="dob">
+                    </div>
+                </fieldset>
+                
+                <fieldset>
+                    <legend>Contact Information</legend>
+                    
+                    <div class="form-group">
+                        <label for="email3">Email</label>
+                        <input type="email" id="email3" name="email">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="123-456-7890">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="address">Address</label>
+                        <textarea id="address" name="address" rows="3"></textarea>
+                    </div>
+                </fieldset>
+                
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </section>
+    
+    <!-- Notes and Best Practices -->
+    <section>
+        <h2>Form Best Practices</h2>
+        <ul>
+            <li>Always use <code>&lt;label&gt;</code> elements with <code>for</code> attributes that match input IDs</li>
+            <li>Use appropriate input types for better mobile experience and validation</li>
+            <li>Include placeholder text to guide users</li>
+            <li>Use HTML5 validation attributes (required, pattern, min, max, etc.)</li>
+            <li>Group related form elements with fieldsets and legends</li>
+            <li>Provide clear error messages and visual feedback</li>
+            <li>Make forms accessible with proper ARIA attributes when needed</li>
+            <li>Use appropriate form methods (GET for searches, POST for data submission)</li>
+        </ul>
+    </section>
+</body>
+</html>

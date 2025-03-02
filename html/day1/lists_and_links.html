@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Lists and Links</title>
+</head>
+<body>
+    <header>
+        <h1>Lists and Links in HTML</h1>
+        <nav>
+            <h2>Main Navigation</h2>
+            <ul>
+                <li><a href="#ordered-lists">Ordered Lists</a></li>
+                <li><a href="#unordered-lists">Unordered Lists</a></li>
+                <li><a href="#definition-lists">Definition Lists</a></li>
+                <li><a href="#links">Links Examples</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="ordered-lists">
+            <h2>Ordered Lists</h2>
+            <ol>
+                <li>First item</li>
+                <li>Second item
+                    <ol type="a">
+                        <li>Sub-item a</li>
+                        <li>Sub-item b</li>
+                    </ol>
+                </li>
+                <li>Third item</li>
+            </ol>
+        </section>
+
+        <section id="unordered-lists">
+            <h2>Unordered Lists</h2>
+            <ul>
+                <li>HTML5</li>
+                <li>CSS3
+                    <ul>
+                        <li>Flexbox</li>
+                        <li>Grid</li>
+                    </ul>
+                </li>
+                <li>JavaScript</li>
+            </ul>
+        </section>
+
+        <section id="definition-lists">
+            <h2>Definition Lists</h2>
+            <dl>
+                <dt>HTML</dt>
+                <dd>HyperText Markup Language - the standard markup language for web pages</dd>
+                
+                <dt>CSS</dt>
+                <dd>Cascading Style Sheets - used for describing the presentation of a document</dd>
+            </dl>
+        </section>
+
+        <section id="links">
+            <h2>Links Examples</h2>
+            <h3>Internal Links</h3>
+            <p><a href="basic_structure.html">View Basic Structure</a></p>
+            <p><a href="text_formatting.html">View Text Formatting</a></p>
+            
+            <h3>External Links</h3>
+            <p><a href="https://developer.mozilla.org" target="_blank">MDN Web Docs</a></p>
+            <p><a href="https://www.w3.org" target="_blank">W3C Website</a></p>
+            
+            <h3>Email Link</h3>
+            <p><a href="mailto:example@example.com">Send us an email</a></p>
+        </section>
+    </main>
+
+    <footer>
+        <p>Practice creating different types of lists and links!</p>
+    </footer>
+</body>
+</html>

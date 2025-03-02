@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semantic HTML Elements</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        
+        /* Semantic layout styling */
+        header, footer {
+            background-color: #333;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        nav {
+            background-color: #444;
+            padding: 0.5rem;
+        }
+        
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+        
+        nav li {
+            margin: 0 1rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        nav a:hover {
+            text-decoration: underline;
+        }
+        
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        
+        section {
+            flex: 2;
+            padding: 1rem;
+        }
+        
+        article {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        aside {
+            flex: 1;
+            background-color: #f5f5f5;
+            padding: 1rem;
+            margin-left: 1rem;
+            border-left: 1px solid #ddd;
+        }
+        
+        figure {
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        
+        figcaption {
+            font-style: italic;
+            margin-top: 0.5rem;
+        }
+        
+        time {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        mark {
+            background-color: #ffffcc;
+            padding: 0 3px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        
+        .example {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        code {
+            background-color: #f5f5f5;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        
+        .comparison {
+            display: flex;
+            margin-bottom: 2rem;
+        }
+        
+        .comparison > div {
+            flex: 1;
+            padding: 1rem;
+            margin: 0 0.5rem;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+        }
+        
+        h3 {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Semantic HTML Elements</h1>
+        <p>Semantic HTML elements clearly describe their meaning to both the browser and the developer. This page demonstrates the proper use of semantic HTML5 elements.</p>
+        
+        <!-- Comparison of Non-Semantic vs Semantic HTML -->
+        <div class="example">
+            <h2>Non-Semantic vs. Semantic HTML</h2>
+            <div class="comparison">
+                <div>
+                    <h3>Non-Semantic HTML</h3>
+                    <p>Uses generic elements that don't describe their content:</p>
+                    <pre><code>&lt;div class="header"&gt;
+    &lt;div class="nav"&gt;...&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="main"&gt;
+    &lt;div class="article"&gt;...&lt;/div&gt;
+    &lt;div class="sidebar"&gt;...&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="footer"&gt;...&lt;/div&gt;</code></pre>
+                </div>
+                <div>
+                    <h3>Semantic HTML</h3>
+                    <p>Uses elements that clearly describe their purpose:</p>
+                    <pre><code>&lt;header&gt;
+    &lt;nav&gt;...&lt;/nav&gt;
+&lt;/header&gt;
+
+&lt;main&gt;
+    &lt;article&gt;...&lt;/article&gt;
+    &lt;aside&gt;...&lt;/aside&gt;
+&lt;/main&gt;
+
+&lt;footer&gt;...&lt;/footer&gt;</code></pre>
+                </div>
+            </div>
+            <p>Semantic HTML improves accessibility, SEO, and code readability.</p>
+        </div>
+        
+        <!-- Semantic Page Structure Example -->
+        <div class="example">
+            <h2>Semantic Page Structure Example</h2>
+            
+            <!-- Header with Navigation -->
+            <header>
+                <h2>Website Title</h2>
+                <nav>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </nav>
+            </header>
+            
+            <!-- Main Content Area -->
+            <main>
+                <section>
+                    <h2>Main Content Section</h2>
+                    
+                    <article>
+                        <header>
+                            <h3>Article Title</h3>
+                            <p>Posted on <time datetime="2023-06-15">June 15, 2023</time> by Author</p>
+                        </header>
+                        
+                        <p>This is the main content of the article. It demonstrates the use of the <code>&lt;article&gt;</code> element, which represents a self-contained composition that could be distributed independently.</p>
+                        
+                        <figure>
+                            <img src="https://via.placeholder.com/600x300" alt="Placeholder image" width="100%">
+                            <figcaption>Figure 1: An example image with a caption using the <code>&lt;figure&gt;</code> and <code>&lt;figcaption&gt;</code> elements.</figcaption>
+                        </figure>
+                        
+                        <p>The article continues with more content. Notice how <mark>important text</mark> can be highlighted using the <code>&lt;mark&gt;</code> element.</p>
+                        
+                        <footer>
+                            <p>Tags: <a href="#">HTML</a>, <a href="#">Semantic</a>, <a href="#">Web Standards</a></p>
+                        </footer>
+                    </article>
+                    
+                    <article>
+                        <header>
+                            <h3>Another Article</h3>
+                            <p>Posted on <time datetime="2023-06-10">June 10, 2023</time> by Author</p>
+                        </header>
+                        
+                        <p>This is another article demonstrating how multiple articles can be contained within a section.</p>
+                        
+                        <blockquote cite="https://developer.mozilla.org/">
+                            <p>Semantic HTML is the use of HTML markup to reinforce the semantics, or meaning, of the information in webpages rather than merely to define its presentation or look.</p>
+                            <footer>— <cite>MDN Web Docs</cite></footer>
+                        </blockquote>
+                    </article>
+                </section>
+                
+                <aside>
+                    <h3>Sidebar</h3>
+                    <p>This is a sidebar that contains supplementary content using the <code>&lt;aside&gt;</code> element.</p>
+                    
+                    <section>
+                        <h4>Recent Posts</h4>
+                        <ul>
+                            <li><a href="#">Post Title 1</a></li>
+                            <li><a href="#">Post Title 2</a></li>
+                            <li><a href="#">Post Title 3</a></li>
+                        </ul>
+                    </section>
+                    
+                    <section>
+                        <h4>Categories</h4>
+                        <ul>
+                            <li><a href="#">Category 1</a></li>
+                            <li><a href="#">Category 2</a></li>
+                            <li><a href="#">Category 3</a></li>
+                        </ul>
+                    </section>
+                </aside>
+            </main>
+            
+            <!-- Footer -->
+            <footer>
+                <p>&copy; 2023 Semantic HTML Example. All rights reserved.</p>
+                <address>
+                    Contact: <a href="mailto:info@example.com">info@example.com</a><br>
+                    123 Main Street, City, Country
+                </address>
+            </footer>
+        </div>
+        
+        <!-- Text-Level Semantic Elements -->
+        <div class="example">
+            <h2>Text-Level Semantic Elements</h2>
+            
+            <p>HTML5 provides several elements for marking up text with specific meaning:</p>
+            
+            <ul>
+                <li><code>&lt;time&gt;</code> - Represents a specific period in time: <time datetime="2023-06-15T14:30:00">June 15, 2023, 2:30 PM</time></li>
+                <li><code>&lt;mark&gt;</code> - Represents text that is highlighted for reference: <mark>This text is marked</mark></li>
+                <li><code>&lt;cite&gt;</code> - Represents the title of a work: <cite>HTML5 Specification</cite></li>
+                <li><code>&lt;abbr&gt;</code> - Represents an abbreviation: <abbr title="World Wide Web Consortium">W3C</abbr> (hover to see the full title)</li>
+                <li><code>&lt;dfn&gt;</code> - Represents a definition term: <dfn title="HyperText Markup Language">HTML</dfn> is the standard markup language for documents designed to be displayed in a web browser.</li>
+                <li><code>&lt;code&gt;</code> - Represents computer code: <code>const x = 10;</code></li>
+                <li><code>&lt;samp&gt;</code> - Represents sample output: <samp>Error: File not found</samp></li>
+                <li><code>&lt;kbd&gt;</code> - Represents keyboard input: Press <kbd>Ctrl</kbd> + <kbd>C</kbd> to copy</li>
+                <li><code>&lt;var&gt;</code> - Represents a variable: The equation is <var>E</var> = <var>m</var><var>c</var><sup>2</sup></li>
+            </ul>
+        </div>
+        
+        <!-- Accessibility Benefits -->
+        <div class="example">
+            <h2>Accessibility Benefits</h2>
+            
+            <p>Using semantic HTML elements provides several accessibility benefits:</p>
+            
+            <ul>
+                <li>Screen readers can better understand the page structure and content</li>
+                <li>Keyboard navigation is improved with proper semantic elements</li>
+                <li>Search engines can better understand and index your content</li>
+                <li>Developers can more easily understand and maintain the code</li>
+                <li>Assistive technologies can provide better user experiences</li>
+            </ul>
+            
+            <p>For example, a screen reader can announce a navigation area when it encounters a <code>&lt;nav&gt;</code> element, or it can allow users to skip to the main content when it finds a <code>&lt;main&gt;</code> element.</p>
+        </div>
+        
+        <!-- Best Practices -->
+        <div class="example">
+            <h2>Best Practices</h2>
+            
+            <ul>
+                <li>Choose semantic elements based on their meaning, not their appearance</li>
+                <li>Use <code>&lt;section&gt;</code> for thematic grouping of content</li>
+                <li>Use <code>&lt;article&gt;</code> for self-contained, independently distributable content</li>
+                <li>Use <code>&lt;nav&gt;</code> for major navigation blocks</li>
+                <li>Use <code>&lt;header&gt;</code> and <code>&lt;footer&gt;</code> for introductory and concluding content</li>
+                <li>Use <code>&lt;aside&gt;</code> for content that is tangentially related to the main content</li>
+                <li>Use <code>&lt;figure&gt;</code> and <code>&lt;figcaption&gt;</code> for self-contained content like images with captions</li>
+                <li>Use <code>&lt;main&gt;</code> to denote the main content area (only one per page)</li>
+                <li>Avoid using <code>&lt;div&gt;</code> when a more semantic element is appropriate</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML5 Multimedia Elements</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .media-container {
+            margin: 20px 0;
+        }
+        
+        video, audio {
+            max-width: 100%;
+        }
+        
+        .responsive-iframe {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+        }
+        
+        .responsive-iframe iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        
+        .controls-example {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .controls-example > div {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        code {
+            background-color: #f5f5f5;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        
+        .note {
+            background-color: #f8f9fa;
+            border-left: 4px solid #4CAF50;
+            padding: 10px 15px;
+            margin: 15px 0;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f2f2f2;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <h1>HTML5 Multimedia Elements</h1>
+    <p>This page demonstrates the use of HTML5 multimedia elements for embedding audio, video, and other content in web pages.</p>
+    
+    <!-- Video Element Section -->
+    <section class="section">
+        <h2>HTML5 Video Element</h2>
+        <p>The <code>&lt;video&gt;</code> element allows you to embed videos directly in your HTML document without requiring plugins.</p>
+        
+        <div class="media-container">
+            <h3>Basic Video Example</h3>
+            <video width="640" height="360" controls>
+                <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
+                <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm" type="video/webm">
+                Your browser does not support the video tag.
+            </video>
+            <p><small>Video: Blossoming flowers (CC0)</small></p>
+        </div>
+        
+        <h3>Video Attributes</h3>
+        <table>
+            <tr>
+                <th>Attribute</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td><code>controls</code></td>
+                <td>Displays video controls (play/pause, volume, etc.)</td>
+            </tr>
+            <tr>
+                <td><code>autoplay</code></td>
+                <td>Starts playing the video automatically (use with caution)</td>
+            </tr>
+            <tr>
+                <td><code>loop</code></td>
+                <td>Replays the video when it ends</td>
+            </tr>
+            <tr>
+                <td><code>muted</code></td>
+                <td>Mutes the audio output</td>
+            </tr>
+            <tr>
+                <td><code>poster</code></td>
+                <td>Specifies an image to show before the video plays</td>
+            </tr>
+            <tr>
+                <td><code>preload</code></td>
+                <td>Specifies if/how the video should be loaded (auto, metadata, none)</td>
+            </tr>
+            <tr>
+                <td><code>width</code>, <code>height</code></td>
+                <td>Sets the dimensions of the video player</td>
+            </tr>
+        </table>
+        
+        <div class="controls-example">
+            <div>
+                <h4>With Poster Image</h4>
+                <video width="100%" controls poster="https://via.placeholder.com/640x360/cccccc/666666?text=Video+Poster">
+                    <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div>
+                <h4>With Loop and Muted</h4>
+                <video width="100%" controls loop muted>
+                    <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+        
+        <div class="note">
+            <p><strong>Note:</strong> Always provide multiple source formats (MP4, WebM) for better browser compatibility. Include fallback content for browsers that don't support the video element.</p>
+        </div>
+    </section>
+    
+    <!-- Audio Element Section -->
+    <section class="section">
+        <h2>HTML5 Audio Element</h2>
+        <p>The <code>&lt;audio&gt;</code> element allows you to embed audio content directly in your HTML document.</p>
+        
+        <div class="media-container">
+            <h3>Basic Audio Example</h3>
+            <audio controls>
+                <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-audio/t-rex-roar.mp3" type="audio/mpeg">
+                <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-audio/t-rex-roar.ogg" type="audio/ogg">
+                Your browser does not support the audio element.
+            </audio>
+            <p><small>Audio: T-Rex Roar (CC0)</small></p>
+        </div>
+        
+        <h3>Audio Attributes</h3>
+        <table>
+            <tr>
+                <th>Attribute</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td><code>controls</code></td>
+                <td>Displays audio controls (play/pause, volume, etc.)</td>
+            </tr>
+            <tr>
+                <td><code>autoplay</code></td>
+                <td>Starts playing the audio automatically (use with caution)</td>
+            </tr>
+            <tr>
+                <td><code>loop</code></td>
+                <td>Replays the audio when it ends</td>
+            </tr>
+            <tr>
+                <td><code>muted</code></td>
+                <td>Mutes the audio output</td>
+            </tr>
+            <tr>
+                <td><code>preload</code></td>
+                <td>Specifies if/how the audio should be loaded (auto, metadata, none)</td>
+            </tr>
+        </table>
+        
+        <div class="note">
+            <p><strong>Accessibility Tip:</strong> Always provide transcripts or captions for audio content to make it accessible to users with hearing impairments.</p>
+        </div>
+    </section>
+    
+    <!-- Embedding Content Section -->
+    <section class="section">
+        <h2>Embedding External Content</h2>
+        <p>HTML provides several ways to embed external content from other sources.</p>
+        
+        <h3>Iframe Element</h3>
+        <p>The <code>&lt;iframe&gt;</code> element allows you to embed another HTML document within the current document.</p>
+        
+        <div class="media-container">
+            <h4>Embedding a Map</h4>
+            <div class="responsive-iframe">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d387193.3059445135!2d-74.25986613799748!3d40.69714941774136!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2s!4v1655668767409!5m2!1sen!2s" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+        
+        <div class="media-container">
+            <h4>Embedding a YouTube Video</h4>
+            <div class="responsive-iframe">
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+        
+        <div class="note">
+            <p><strong>Security Note:</strong> When using iframes, always include the <code>sandbox</code> attribute and appropriate permissions to enhance security. Be cautious about embedding content from untrusted sources.</p>
+        </div>
+        
+        <h3>Object and Embed Elements</h3>
+        <p>The <code>&lt;object&gt;</code> and <code>&lt;embed&gt;</code> elements can be used to embed multimedia content like PDFs, Flash content (legacy), and other plugins.</p>
+        
+        <div class="media-container">
+            <h4>Embedding a PDF (Object Element)</h4>
+            <object data="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" type="application/pdf" width="100%" height="500px">
+                <p>Your browser does not support PDFs. <a href="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf">Download the PDF</a> instead.</p>
+            </object>
+        </div>
+    </section>
+    
+    <!-- Responsive Media Section -->
+    <section class="section">
+        <h2>Responsive Multimedia</h2>
+        <p>Making multimedia content responsive ensures it displays properly on different screen sizes.</p>
+        
+        <h3>Responsive Video</h3>
+        <p>Use CSS to create responsive videos that maintain their aspect ratio:</p>
+        <pre><code>.responsive-video {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
+}
+
+.responsive-video video,
+.responsive-video iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}</code></pre>
+        
+        <div class="media-container">
+            <h4>Responsive Video Example</h4>
+            <div class="responsive-iframe">
+                <video controls>
+                    <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+        
+        <h3>Picture Element for Responsive Images</h3>
+        <p>The <code>&lt;picture&gt;</code> element allows you to specify different images for different screen sizes:</p>
+        
+        <div class="media-container">
+            <picture>
+                <source media="(min-width: 800px)" srcset="https://via.placeholder.com/1200x400/3498db/ffffff?text=Large+Screen+Image">
+                <source media="(min-width: 480px)" srcset="https://via.placeholder.com/800x400/3498db/ffffff?text=Medium+Screen+Image">
+                <img src="https://via.placeholder.com/400x400/3498db/ffffff?text=Small+Screen+Image" alt="Responsive image example" style="width:100%;">
+            </picture>
+            <p><small>Resize your browser window to see the image change based on screen width.</small></p>
+        </div>
+    </section>
+    
+    <!-- Best Practices Section -->
+    <section class="section">
+        <h2>Multimedia Best Practices</h2>
+        <ul>
+            <li>Always provide alternative content for users who can't access multimedia (captions, transcripts, descriptions)</li>
+            <li>Use responsive design techniques to ensure multimedia works on all devices</li>
+            <li>Optimize file sizes for faster loading (compress videos and audio)</li>
+            <li>Include proper controls for user interaction</li>
+            <li>Consider autoplay carefully - it can be disruptive and consume bandwidth</li>
+            <li>Provide multiple file formats for better browser compatibility</li>
+            <li>Use the <code>preload="metadata"</code> attribute to improve page load performance</li>
+            <li>Include appropriate ARIA attributes for accessibility</li>
+            <li>Test multimedia content across different browsers and devices</li>
+        </ul>
+    </section>
+    
+    <footer>
+        <p>&copy; 2023 HTML5 Multimedia Examples | ChaiCode Web Development Course</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced HTML Structure</title>
+    <style>
+        /* Base styles */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        /* Header styles */
+        .page-header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        /* Navigation styles */
+        .main-nav ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .main-nav li {
+            margin-left: 1.5rem;
+        }
+        
+        .main-nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+        
+        .main-nav a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: white;
+            transition: width 0.3s;
+        }
+        
+        .main-nav a:hover:after {
+            width: 100%;
+        }
+        
+        /* Hero section */
+        .hero {
+            background-color: #3498db;
+            color: white;
+            padding: 3rem 1rem;
+            text-align: center;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Main content area */
+        .page-content {
+            flex: 1;
+            display: flex;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        /* Primary content */
+        .primary-content {
+            flex: 3;
+            padding-right: 2rem;
+        }
+        
+        .content-section {
+            margin-bottom: 3rem;
+        }
+        
+        .content-section:last-child {
+            margin-bottom: 0;
+        }
+        
+        /* Article styles */
+        article {
+            background-color: #f9f9f9;
+            border: 1px solid #eee;
+            border-radius: 5px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        article header {
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 0.5rem;
+        }
+        
+        article h2 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        
+        article .meta {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+        
+        article footer {
+            margin-top: 1.5rem;
+            padding-top: 0.5rem;
+            border-top: 1px solid #eee;
+            font-size: 0.9rem;
+            color: #7f8c8d;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            flex: 1;
+            background-color: #f5f5f5;
+            padding: 1.5rem;
+            border-radius: 5px;
+            align-self: flex-start;
+            position: sticky;
+            top: 80px;
+        }
+        
+        .sidebar-section {
+            margin-bottom: 2rem;
+        }
+        
+        .sidebar-section:last-child {
+            margin-bottom: 0;
+        }
+        
+        .sidebar h3 {
+            margin-top: 0;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 0.5rem;
+            color: #2c3e50;
+        }
+        
+        .sidebar ul {
+            padding-left: 1.2rem;
+            margin-bottom: 0;
+        }
+        
+        .sidebar li {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Call to action section */
+        .cta-section {
+            background-color: #f39c12;
+            color: white;
+            padding: 3rem 1rem;
+            text-align: center;
+        }
+        
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: white;
+            color: #f39c12;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 1rem;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        
+        .cta-button:hover {
+            background-color: #f5f5f5;
+            transform: translateY(-3px);
+        }
+        
+        /* Footer */
+        .page-footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 2rem 1rem;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 200px;
+            margin-bottom: 1.5rem;
+            padding-right: 1rem;
+        }
+        
+        .footer-section h3 {
+            margin-top: 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding-bottom: 0.5rem;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .footer-section li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-section a {
+            color: #ecf0f1;
+            text-decoration: none;
+        }
+        
+        .footer-section a:hover {
+            text-decoration: underline;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            margin-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            width: 100%;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .main-nav {
+                margin-top: 1rem;
+                align-self: stretch;
+            }
+            
+            .main-nav ul {
+                flex-direction: column;
+            }
+            
+            .main-nav li {
+                margin: 0.5rem 0;
+                margin-left: 0;
+            }
+            
+            .page-content {
+                flex-direction: column;
+            }
+            
+            .primary-content {
+                padding-right: 0;
+                margin-bottom: 2rem;
+            }
+            
+            .sidebar {
+                position: static;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Skip navigation for accessibility -->
+    <a href="#main-content" class="visually-hidden">Skip to main content</a>
+    
+    <!-- Page Header with Navigation -->
+    <header class="page-header" role="banner">
+        <div class="header-container">
+            <div class="logo">Advanced HTML</div>
+            <nav class="main-nav" role="navigation" aria-label="Main Navigation">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Features</a></li>
+                    <li><a href="#">Documentation</a></li>
+                    <li><a href="#">Examples</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero" role="region" aria-labelledby="hero-heading">
+        <div class="hero-content">
+            <h1 id="hero-heading">Advanced HTML5 Document Structure</h1>
+            <p>Learn how to create well-organized, semantic, and accessible web documents using modern HTML5 techniques.</p>
+        </div>
+    </section>
+    
+    <!-- Main Content Area -->
+    <div class="page-content">
+        <!-- Primary Content -->
+        <main class="primary-content" id="main-content" role="main">
+            <section class="content-section" aria-labelledby="section-heading-1">
+                <h2 id="section-heading-1">Semantic Document Structure</h2>
+                
+                <article>
+                    <header>
+                        <h2>The Importance of Semantic HTML</h2>
+                        <div class="meta">Published on <time datetime="2023-06-15">June 15, 2023</time> by <span class="author">Web Developer</span></div>
+                    </header>
+                    
+                    <p>Semantic HTML refers to the use of HTML markup to reinforce the meaning of the information in webpages rather than merely to define its presentation or appearance. Using semantic HTML elements helps search engines, screen readers, and other user devices determine the significance and context of web content.</p>
+                    
+                    <p>Key benefits of semantic HTML include:</p>
+                    <ul>
+                        <li>Improved accessibility for users with disabilities</li>
+                        <li>Better SEO performance</li>
+                        <li>Easier code maintenance and readability</li>
+                        <li>Consistent rendering across different devices</li>
+                    </ul>
+                    
+                    <p>When building web pages, always choose the most appropriate semantic element for the content rather than using generic <code>&lt;div&gt;</code> or <code>&lt;span&gt;</code> elements with CSS classes.</p>
+                    
+                    <footer>
+                        <p>Tags: <a href="#">HTML5</a>, <a href="#">Semantics</a>, <a href="#">Accessibility</a></p>
+                    </footer>
+                </article>
+                
+                <article>
+                    <header>
+                        <h2>Advanced Document Outlining</h2>
+                        <div class="meta">Published on <time datetime="2023-06-10">June 10, 2023</time> by <span class="author">Web Developer</span></div>
+                    </header>
+                    
+                    <p>Creating a logical document outline is essential for both users and machines to understand the structure and hierarchy of your content. HTML5 provides a variety of sectioning elements that help define the document outline.</p>
+                    
+                    <p>The main sectioning elements include:</p>
+                    <ul>
+                        <li><code>&lt;section&gt;</code> - A thematic grouping of content</li>
+                        <li><code>&lt;article&gt;</code> - A self-contained composition</li>
+                        <li><code>&lt;aside&gt;</code> - Content tangentially related to the main content</li>
+                        <li><code>&lt;nav&gt;</code> - A section of navigation links</li>
+                    </ul>
+                    
+                    <p>When using these elements, it's important to maintain a logical heading hierarchy (h1-h6) within each section to create a proper document outline.</p>
+                    
+                    <footer>
+                        <p>Tags: <a href="#">HTML5</a>, <a href="#">Document Outline</a>, <a href="#">Structure</a></p>
+                    </footer>
+                </article>
+            </section>
+            
+            <section class="content-section" aria-labelledby="section-heading-2">
+                <h2 id="section-heading-2">Advanced HTML5 Features</h2>
+                
+                <article>
+                    <header>
+                        <h2>Using HTML5 Microdata</h2>
+                        <div class="meta">Published on <time datetime="2023-06-05">June 5, 2023</time> by <span class="author">Web Developer</span></div>
+                    </header>
+                    
+                    <p>HTML5 Microdata is a way to label content to describe a specific type of information, such as a person, event, organization, or product. Search engines use this structured data to better understand the content of your page and create rich search results.</p>
+                    
+                    <p>Microdata uses the following attributes:</p>
+                    <ul>
+                        <li><code>itemscope</code> - Creates an item</li>
+                        <li><code>itemtype</code> - Specifies the item type using a vocabulary URL</li>
+                        <li><code>itemprop</code> - Adds a property to an item</li>
+                    </ul>
+                    
+                    <p>For example, to mark up a product:</p>
+                    <pre><code>&lt;div itemscope itemtype="https://schema.org/Product"&gt;
+  &lt;h2 itemprop="name"&gt;Product Name&lt;/h2&gt;
+  &lt;p itemprop="description"&gt;Product description...&lt;/p&gt;
+  &lt;p itemprop="price"&gt;$19.99&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+                    
+                    <footer>
+                        <p>Tags:
