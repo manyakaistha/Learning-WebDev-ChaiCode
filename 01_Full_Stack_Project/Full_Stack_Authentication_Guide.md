@@ -9,7 +9,7 @@ This project is perfect for beginners who want to understand how authentication 
 ## Project Overview
 
 ```mermaid
-graph LR
+flowchart LR
     A[Frontend] -->|HTTP Requests| B[Backend]
     B -->|HTTP Responses| A
     B -->|Queries| C[(Database)]
@@ -88,7 +88,7 @@ touch utils/db.js
 Install the required packages:
 
 ```bash
-npm install express mongoose cors dotenv
+npm install express mongoose cors dotenv bcrypt jsonwebtoken cookie-parser nodemailer crypto
 npm install -D nodemon
 ```
 
@@ -96,6 +96,11 @@ npm install -D nodemon
 - **mongoose**: MongoDB object modeling tool
 - **cors**: Middleware to enable Cross-Origin Resource Sharing
 - **dotenv**: Loads environment variables from .env file
+- **bcrypt**: Library for hashing passwords
+- **jsonwebtoken**: Implementation of JSON Web Tokens
+- **cookie-parser**: Middleware to parse cookies in requests
+- **nodemailer**: Module for sending emails
+- **crypto**: Node.js built-in module for cryptographic functionality
 - **nodemon**: Development tool that automatically restarts the server when files change
 
 ### Step 4: Configure package.json
@@ -174,6 +179,7 @@ Edit the `index.js` file:
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 import db from "./utils/db.js";
 
 // Import routes
@@ -198,6 +204,8 @@ app.use(
 // Middleware to parse JSON and URL-encoded data
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+// Middleware to parse cookies
+app.use(cookieParser());
 
 // Set port from environment variables or use default
 const port = process.env.PORT || 4000;
@@ -216,7 +224,7 @@ app.use("/api/v1/users", userRoutes);
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
-});
+});}
 ```
 
 ## Creating the User Model
@@ -433,7 +441,7 @@ Edit the `routes/user.routes.js` file:
 
 ```javascript
 import express from "express";
-import { registerUser, loginUser } from "../controller/user.controller.js";
+import { registerUser, loginUser, verifyUser, requestPasswordReset, resetPassword } from "../controller/user.controller.js";
 
 const router = express.Router();
 
@@ -443,10 +451,14 @@ router.post("/register", registerUser);
 // Login route
 router.post("/login", loginUser);
 
-// In a complete application, you would add more routes:
-// router.get("/verify", verifyUser);
-// router.post("/reset", requestPasswordReset);
-// router.post("/reset-password", resetPassword);
+// Email verification route
+router.get("/verify", verifyUser);
+
+// Password reset request route
+router.post("/reset", requestPasswordReset);
+
+// Reset password with token route
+router.post("/reset-password", resetPassword);
 
 export default router;
 ```
@@ -602,17 +614,28 @@ This configuration:
 ## Understanding API Routes and HTTP Verbs
 
 ```mermaid
-graph TD
-    A[API Routes] --> B[GET - Retrieve Data]
-    A --> C[POST - Create Data]
-    A --> D[PUT - Update Data]
-    A --> E[DELETE - Remove Data]
+flowchart TD
+    A[API Routes]
+    B[GET - Retrieve Data]
+    C[POST - Create Data]
+    D[PUT - Update Data]
+    E[DELETE - Remove Data]
+    F[/api/v1/users/register]
+    G[/api/v1/users/verify]
+    H[/api/v1/users/login]
+    I[/api/v1/users/reset]
+    J[/api/v1/users/reset-password]
     
-    C --> F[/api/v1/users/register]
-    B --> G[/api/v1/users/verify]
-    C --> H[/api/v1/users/login]
-    C --> I[/api/v1/users/reset]
-    C --> J[/api/v1/users/reset-password]
+    A --> B
+    A --> C
+    A --> D
+    A --> E
+    
+    C --> F
+    B --> G
+    C --> H
+    C --> I
+    C --> J
     
     style A fill:#f9f,stroke:#333,stroke-width:2px
     style B fill:#bbf,stroke:#333,stroke-width:2px
@@ -908,16 +931,247 @@ router.put("/profile", authenticate, updateUserProfile);
 router.get("/users", authenticate, authorize(['admin']), getAllUsers);
 ```
 
+## Implementing Email Verification
+
+### Setting Up Nodemailer with Mailtrap
+
+Email verification is an important security feature that ensures users provide valid email addresses. We'll use Nodemailer with Mailtrap for testing our email functionality.
+
+1. Install the required packages:
+```bash
+npm install nodemailer crypto cookie-parser
+```
+
+2. Create a utility file for email functionality in `utils/email.js`:
+```javascript
+import nodemailer from 'nodemailer';
+import dotenv from 'dotenv';
+dotenv.config();
+
+const sendEmail = async (options) => {
+  // Create a transporter using Mailtrap
+  const transporter = nodemailer.createTransport({
+    host: process.env.EMAIL_HOST || 'smtp.mailtrap.io',
+    port: process.env.EMAIL_PORT || 2525,
+    auth: {
+      user: process.env.EMAIL_USERNAME,
+      pass: process.env.EMAIL_PASSWORD
+    }
+  });
+
+  // Define email options
+  const mailOptions = {
+    from: process.env.EMAIL_FROM || 'noreply@auth-app.com',
+    to: options.email,
+    subject: options.subject,
+    text: options.message,
+    html: options.html
+  };
+
+  // Send the email
+  await transporter.sendMail(mailOptions);
+};
+
+export default sendEmail;
+```
+
+3. Update the `.env` file to include Mailtrap credentials:
+```
+EMAIL_HOST=smtp.mailtrap.io
+EMAIL_PORT=2525
+EMAIL_USERNAME=your_mailtrap_username
+EMAIL_PASSWORD=your_mailtrap_password
+EMAIL_FROM=noreply@auth-app.com
+JWT_SECRET=your_jwt_secret
+```
+
+### Implementing Verification Token Generation
+
+We'll use the crypto module to generate secure random tokens for email verification:
+
+1. Update the user controller to include verification functionality:
+```javascript
+import crypto from 'crypto';
+import User from '../model/User.model.js';
+import sendEmail from '../utils/email.js';
+
+// Register a new user with verification
+const registerUser = async (req, res) => {
+  try {
+    const { name, email, password } = req.body;
+    
+    // Validate input
+    if (!name || !email || !password) {
+      return res.status(400).json({ message: "All fields are required" });
+    }
+    
+    // Check if user already exists
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ message: "User already exists" });
+    }
+    
+    // Generate verification token using crypto
+    const verificationToken = crypto.randomBytes(32).toString('hex');
+    
+    // Create new user
+    const newUser = new User({
+      name,
+      email,
+      password,
+      verificationToken
+    });
+    
+    // Save user to database
+    await newUser.save();
+    
+    // Create verification URL
+    const verificationURL = `${process.env.BASE_URL}/verify?token=${verificationToken}`;
+    
+    // Send verification email
+    await sendEmail({
+      email: newUser.email,
+      subject: 'Please verify your email',
+      message: `Please click on the link to verify your email: ${verificationURL}`,
+      html: `<p>Please click <a href="${verificationURL}">here</a> to verify your email.</p>`
+    });
+    
+    // Return success response (without sending the verification token)
+    res.status(201).json({ 
+      message: "User registered successfully. Please check your email to verify your account.", 
+      user: { id: newUser._id, name, email } 
+    });
+  } catch (error) {
+    res.status(500).json({ message: "Error registering user", error: error.message });
+  }
+};
+
+// Verify user email
+const verifyUser = async (req, res) => {
+  try {
+    const { token } = req.query;
+    
+    // Find user with the verification token
+    const user = await User.findOne({ verificationToken: token });
+    
+    if (!user) {
+      return res.status(400).json({ message: "Invalid or expired verification token" });
+    }
+    
+    // Update user verification status
+    user.isVerified = true;
+    user.verificationToken = null; // Remove the verification token
+    await user.save();
+    
+    res.status(200).json({ message: "Email verified successfully. You can now log in." });
+  } catch (error) {
+    res.status(500).json({ message: "Error verifying email", error: error.message });
+  }
+};
+```
+
+## Implementing Password Reset
+
+Password reset functionality allows users to regain access to their accounts if they forget their passwords.
+
+1. Add password reset request controller:
+```javascript
+const requestPasswordReset = async (req, res) => {
+  try {
+    const { email } = req.body;
+    
+    // Find user by email
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    
+    // Generate reset token
+    const resetToken = crypto.randomBytes(32).toString('hex');
+    
+    // Hash the reset token and save to user
+    user.resetPasswordToken = crypto
+      .createHash('sha256')
+      .update(resetToken)
+      .digest('hex');
+      
+    // Set token expiration (1 hour)
+    user.resetPasswordExpires = Date.now() + 60 * 60 * 1000;
+    
+    await user.save();
+    
+    // Create reset URL
+    const resetURL = `${process.env.BASE_URL}/reset-password?token=${resetToken}`;
+    
+    // Send reset email
+    await sendEmail({
+      email: user.email,
+      subject: 'Password Reset Request',
+      message: `Please click on the link to reset your password: ${resetURL}. The link is valid for 1 hour.`,
+      html: `<p>Please click <a href="${resetURL}">here</a> to reset your password. The link is valid for 1 hour.</p>`
+    });
+    
+    res.status(200).json({ message: "Password reset link sent to your email" });
+  } catch (error) {
+    res.status(500).json({ message: "Error requesting password reset", error: error.message });
+  }
+};
+
+// Reset password with token
+const resetPassword = async (req, res) => {
+  try {
+    const { token, password } = req.body;
+    
+    if (!token || !password) {
+      return res.status(400).json({ message: "Token and password are required" });
+    }
+    
+    // Hash the token from the request to compare with stored hash
+    const hashedToken = crypto
+      .createHash('sha256')
+      .update(token)
+      .digest('hex');
+    
+    // Find user with the reset token and check if it's not expired
+    const user = await User.findOne({
+      resetPasswordToken: hashedToken,
+      resetPasswordExpires: { $gt: Date.now() }
+    });
+    
+    if (!user) {
+      return res.status(400).json({ message: "Invalid or expired reset token" });
+    }
+    
+    // Update password and clear reset token fields
+    user.password = password; // Will be hashed by the pre-save hook
+    user.resetPasswordToken = null;
+    user.resetPasswordExpires = null;
+    
+    await user.save();
+    
+    res.status(200).json({ message: "Password reset successful. You can now log in with your new password." });
+  } catch (error) {
+    res.status(500).json({ message: "Error resetting password", error: error.message });
+  }
+};
+```
+
 ## Next Steps
 
-This guide has covered the basics of setting up an authentication system. To make it production-ready, you would need to:
+This guide has covered the implementation of a complete authentication system including:
 
-1. **Implement Password Hashing**: Use a library like bcrypt to hash passwords before storing them
-2. **Add Input Validation**: Validate user input to prevent security vulnerabilities
-3. **Set Up Email Sending**: Use a service like Nodemailer to send verification and reset emails
-4. **Add Error Handling**: Implement proper error handling throughout the application
-5. **Add Frontend**: Create a frontend application that interacts with your API
-6. **Add Testing**: Write unit and integration tests for your authentication system
+1. **User Registration with Email Verification**: Using Nodemailer and crypto for secure token generation
+2. **Password Security**: Using bcrypt.js to hash passwords before storing them
+3. **JWT Authentication**: Generating and verifying JWT tokens for authenticated requests
+4. **Password Reset Flow**: Allowing users to securely reset forgotten passwords
+5. **Security Best Practices**: Using HTTP-only cookies, CSRF protection, and proper error handling
+
+To make this system production-ready, consider:
+
+1. **Adding Input Validation**: Use a library like Joi or express-validator
+2. **Implementing Rate Limiting**: Prevent brute force attacks
+3. **Adding Frontend**: Create a frontend application that interacts with your API
+4. **Adding Testing**: Write unit and integration tests for your authentication system
 
 
 ## Implementing Password Security
@@ -965,16 +1219,14 @@ const userSchema = new mongoose.Schema(
 );
 
 // Hash password before saving
+// We don't use arrow functions here because we need access to 'this'
 userSchema.pre("save", async function (next) {
   // Only hash the password if it's modified (or new)
   if (!this.isModified("password")) return next();
   
   try {
-    // Generate a salt
-    const salt = await bcrypt.genSalt(10);
-    
-    // Hash the password along with the new salt
-    this.password = await bcrypt.hash(this.password, salt);
+    // Hash the password with a salt factor of 10
+    this.password = await bcrypt.hash(this.password, 10);
     next();
   } catch (error) {
     next(error);
@@ -1000,20 +1252,42 @@ const loginUser = async (req, res) => {
     // Find user by email
     const user = await User.findOne({ email });
     if (!user) {
-      return res.status(401).json({ message: "Invalid credentials" });
+      return res.status(401).json({ message: "Invalid email or password" });
     }
     
     // Compare passwords using the method we defined
     const isMatch = await user.comparePassword(password);
     if (!isMatch) {
-      return res.status(401).json({ message: "Invalid credentials" });
+      return res.status(401).json({ message: "Invalid email or password" });
     }
     
-    // Rest of login logic...
+    // Generate JWT token
+    const token = jwt.sign(
+      { id: user._id, role: user.role },
+      process.env.JWT_SECRET || "shhh",
+      { expiresIn: '24h' }
+    );
+    
+    // Set cookie options
+    const cookieOptions = {
+      expires: new Date(Date.now() + 24 * 60 * 60 * 1000), // 24 hours
+      httpOnly: true, // Cannot be accessed by client-side JavaScript
+      secure: process.env.NODE_ENV === "production", // Only sent over HTTPS in production
+      sameSite: "strict" // Protection against CSRF attacks
+    };
+    
+    // Set cookie and send response
+    res.cookie("token", token, cookieOptions);
+    
+    res.status(200).json({ 
+      message: "Login successful",
+      user: { id: user._id, name: user.name, email: user.email, role: user.role }
+    });
   } catch (error) {
     res.status(500).json({ message: "Error logging in", error: error.message });
   }
 };
+```
 ```
 
 ### Security Best Practices
