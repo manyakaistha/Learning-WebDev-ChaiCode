@@ -1,0 +1,156 @@
+.mood-btn-container {
+    text-align: center;
+    margin: 0.5rem;
+}
+
+.mood-label {
+    display: block;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+    color: #6c757d;
+    font-weight: 500;
+}
+
+.mood-btn {
+    font-size: 2.5rem;
+    padding: 1rem;
+    border: 2px solid transparent;
+    background: none;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.mood-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.mood-btn.selected {
+    border-color: #0d6efd;
+    border-radius: 8px;
+    background-color: rgba(13, 110, 253, 0.1);
+}
+
+.mood-history {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.mood-entry {
+    border-left: 4px solid #0d6efd;
+    padding: 0.5rem 2.5rem 0.5rem 1rem;
+    margin-bottom: 0.5rem;
+    background-color: #f8f9fa;
+    position: relative;
+}
+
+.delete-mood {
+    position: absolute;
+    right: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6c757d;
+    transition: color 0.2s;
+}
+
+.delete-mood:hover {
+    color: #dc3545;
+}
+
+.delete-mood:active {
+    color: #dc3545;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    padding: 1rem;
+}
+
+.calendar-header {
+    text-align: center;
+    font-weight: 600;
+    color: #495057;
+    padding: 0.5rem;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.calendar-day.empty {
+    background-color: #f8f9fa;
+    border: none;
+    box-shadow: none;
+}
+
+.calendar-day .day-number {
+    font-weight: 500;
+    color: #495057;
+    margin-bottom: 0.25rem;
+}
+
+.calendar-day {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    padding: 0.5rem;
+    text-align: center;
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    transition: all 0.2s ease;
+}
+
+.calendar-day:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+}
+
+@media (max-width: 768px) {
+    .mood-calendar {
+        gap: 2px;
+        padding: 0.5rem;
+    }
+    
+    .calendar-day {
+        padding: 0.125rem;
+    }
+
+    .calendar-day .mood-name {
+        display: none;
+    }
+}
+
+.calendar-day .mood-emoji {
+    font-size: 1.25rem;
+    margin: 0.25rem 0;
+}
+
+.calendar-day .mood-name {
+    font-size: 0.75rem;
+    margin: 0;
+}
+
+.mood-entry:hover {
+    background-color: #e9ecef;
+}
+
+.mood-date {
+    font-size: 0.875rem;
+    color: #6c757d;
+}
+
+.mood-emoji {
+    font-size: 1.25rem;
+    margin-right: 0.5rem;
+}
+
+.btn-group .btn.active {
+    background-color: #0d6efd;
+    color: white;
+    border-color: #0d6efd;
+}
