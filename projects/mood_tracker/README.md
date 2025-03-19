@@ -31,10 +31,17 @@ This application can be deployed to any static web hosting service:
 - GitHub Pages
 - Netlify
 - Any web server that can serve static files
+- You can view the deployed version of the application [here](https://mood-tracker-manya.netlify.app/).
 
 ## Screenshots
 
-[Add screenshots of your application here]
+![Homepage](./screenshots/Screenshot%202025-03-19%20at%2021.28.51.png)
+*New Window*
+![List View](./screenshots/Screenshot%202025-03-19%20at%2021.29.09.png)
+*List view displaying mood history*
+
+![Calender View](./screenshots/sssets/Screenshot%202025-03-19%20at%2021.29.23.png)
+*Calender view displaying mood history*
 
 ## Contributing
 

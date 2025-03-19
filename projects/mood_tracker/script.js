@@ -43,8 +43,10 @@ let currentView = 'list';
 moodButtons.forEach(button => {
     button.addEventListener('click', () => {
         selectedMood = button.dataset.mood;
+        // adds css class to selected mood button
         button.classList.add('selected');
         saveMood();
+        // remove css class after 200ms
         setTimeout(() => button.classList.remove('selected'), 200);
     });
 });
@@ -52,8 +54,11 @@ moodButtons.forEach(button => {
 viewButtons.forEach(button => {
     button.addEventListener('click', () => {
         currentView = button.dataset.view;
+        // removes the current class from all view buttons
         viewButtons.forEach(btn => btn.classList.remove('active'));
+        // adds the active class to the clicked button
         button.classList.add('active');
+        // display the current view based on the clicked view option
         displayCurrentView();
     });
 });
@@ -61,7 +66,7 @@ viewButtons.forEach(button => {
 // Save mood entry
 function saveMood() {
     if (!selectedMood) return;
-
+    // creates a new mood entry object
     const moodEntry = {
         id: Date.now().toString(),
         mood: selectedMood,
@@ -69,7 +74,8 @@ function saveMood() {
     };
 
     try {
-        moodHistory.unshift(moodEntry);
+        // adds the mood to the end of the moodhistory arrya, we display the moods in reversed as nshift will is inefficent 
+        moodHistory.push(moodEntry);
         localStorage.setItem(STORAGE_KEY, JSON.stringify(moodHistory));
         displayCurrentView();
     } catch (error) {
@@ -90,7 +96,7 @@ function deleteMood(id) {
     }
 }
 
-// Display current view
+// displaying current view
 function displayCurrentView() {
     moodHistoryContainer.classList.toggle('d-none', currentView !== 'list');
     moodCalendarContainer.classList.toggle('d-none', currentView !== 'calendar');
@@ -102,14 +108,14 @@ function displayCurrentView() {
     }
 }
 
-// Display list view
+// displaying list view
 function displayListView() {
     moodHistoryContainer.innerHTML = moodHistory.length ?
-        moodHistory.map(createMoodEntryHTML).join('') :
+        [...moodHistory].reverse().map(createMoodEntryHTML).join('') :
         '<p class="text-muted">No mood entries yet.</p>';
 }
-
-// Mapping from mood values back to mood names
+// THe averages the mood values for each day and other optimisations are not necessary but a nice to have
+// Mapping from mood values back to mood names to use this in the calendar view
 const moodValueToName = {
     5: 'great',
     4: 'good',
@@ -131,7 +137,7 @@ function calculateAverageMoodForDay(date) {
     return moodValueToName[avgValue];
 }
 
-// Display calendar view
+// Displaying calendar view
 function displayCalendarView() {
     const now = new Date();
     const year = now.getFullYear();
@@ -162,13 +168,13 @@ function displayCalendarView() {
                 </div>
             `;
         }).join(''),
-        '</div>' // Close grid container
+        '</div>'
     ].join('');
 
     moodCalendarContainer.innerHTML = calendarHTML;
 }
 
-// Create HTML for a mood entry
+// creating HTML for a mood entry in list mode and also add the delete button for each mood entry
 function createMoodEntryHTML(entry) {
     const date = new Date(entry.timestamp);
     const formattedDate = date.toLocaleString('en-US', {
@@ -189,6 +195,6 @@ function createMoodEntryHTML(entry) {
         </div>
     `;
 }
-// Initial display
+// Initial display window
 displayCurrentView();
 viewButtons[0].classList.add('active');
