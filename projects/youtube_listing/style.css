@@ -1,0 +1,46 @@
+.navbar {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.video-card {
+    transition: transform 0.2s;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.video-card:hover {
+    transform: translateY(-5px);
+}
+
+.video-thumbnail {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 0.75rem;
+}
+
+.video-title {
+    display: block;
+    max-height: 2.8em;
+    line-height: 1.4;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    flex-grow: 1;
+}
+
+.channel-name {
+    color: #606060;
+    font-size: 0.9rem;
+}
+
+@media (max-width: 576px) {
+    .navbar .d-flex {
+        width: 100% !important;
+        margin-top: 0.5rem;
+    }
+}
