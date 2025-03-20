@@ -30,8 +30,9 @@ The application uses the FreeAPI YouTube endpoint:
 - Documentation: https://freeapi.hashnode.space/api-guide/apireference/getYoutubeVideos
 
 ## Screenshots
-
-[Add screenshots of your application here]
+![Youtube Video Listing](./Screenshot 2025-03-20 at 13.26.48.png)
+*Screenshot of the deployed website*
 
 ## Deployment
+- You can view the deployed version of the application [here](https://youtube-listing-manya.netlify.app/).
 

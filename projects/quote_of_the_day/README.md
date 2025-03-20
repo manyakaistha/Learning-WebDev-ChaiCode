@@ -14,15 +14,14 @@ A simple and elegant web application that displays random quotes fetched from an
 - HTML5
 - CSS3
 - Bootstrap5
-- Vanilla JavaScript
+- JavaScript
 - [Free Quotes API](https://freeapi.app)
 
 ## Getting Started
 
 1. Clone the repository
 2. Open index.html in your browser
-
-No build process or dependencies required! This is a simple static website that runs directly in the browser. 
+- this is a static website, so we dont need a server
 
 ## API Reference
 
@@ -31,21 +30,12 @@ This project uses the Free Quotes API to fetch random quotes:
 - Documentation: [API Guide](https://freeapi.hashnode.space/api-guide/apireference/getARandomQuote)
 
 ## Deployment
-
-This application can be deployed to any static web hosting service:
-- GitHub Pages
-- Netlify
-- Vercel
-- Any web server that can serve static files
+- You can view the deployed version of the application [here](https://quote-of-the-day-manya.netlify.app/)
 
 ## Screenshots
-
-*Screenshots will be added once the application is complete*
+![Quote of the day](./Screenshot 2025-03-20 at 13.31.55.png)
+*Screenshots of the deployed website*
 
 ## Contributing
 
 Feel free to submit issues and enhancement requests!
-
-## License
-
-MIT
