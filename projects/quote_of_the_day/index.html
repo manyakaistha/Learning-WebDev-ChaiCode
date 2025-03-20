@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quote of the Day</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container min-vh-100 d-flex align-items-center justify-content-center py-5">
+        <div class="card quote-box bg-dark bg-opacity-75 text-white">
+            <div class="card-body">
+                <h1 class="card-title text-center mb-4">Quote of the Day</h1>
+                <div class="quote-content text-center mb-4">
+                    <p id="quote-text" class="fs-4 fst-italic mb-3">Loading your quote...</p>
+                    <p id="quote-author" class="fs-5">- Author</p>
+                </div>
+                <div class="d-grid gap-2 d-sm-flex justify-content-center">
+                    <button id="new-quote" class="btn btn-outline-light">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
+                    <button id="copy-quote" class="btn btn-outline-light">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                    <button id="tweet-quote" class="btn btn-outline-light">
+                        <i class="fab fa-twitter"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
