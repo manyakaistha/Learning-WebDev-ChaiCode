@@ -72,5 +72,5 @@ function searchVideo(query) {
 
 searchInput.addEventListener('input', (e) => searchVideo(e.target.value));
 
-// Initial fetch
+// show all videos as soon as the page loads
 fetchVideos();

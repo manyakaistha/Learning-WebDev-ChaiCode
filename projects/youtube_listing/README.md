@@ -1,6 +1,6 @@
 # YouTube Video Listing
 
-A responsive web application that displays YouTube videos fetched from the FreeAPI endpoint. Users can browse videos in a grid layout and search for specific content.
+A responsive web application that displays YouTube videos fetched from the FreeAPI endpoint. Users can browse videos in a grid layout like seen in youtueb and search for a specific content.
 
 ## Features
 
@@ -14,14 +14,14 @@ A responsive web application that displays YouTube videos fetched from the FreeA
 
 - HTML5
 - CSS3
-- JavaScript (ES6+)
 - Bootstrap 5
-- FreeAPI YouTube Endpoint
+- JavaScript
 
 ## Setup Instructions
 
 1. Clone the repository
 2. Open `index.html` in a web browser
+3. This is a static website, so we dont need a server
 
 ## API Reference
 
@@ -35,4 +35,3 @@ The application uses the FreeAPI YouTube endpoint:
 
 ## Deployment
 
-[Add your deployment link here]
