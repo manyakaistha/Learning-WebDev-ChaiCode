@@ -22,8 +22,6 @@ A simple and intuitive daily mood tracking application built with vanilla JavaSc
 1. Clone the repository
 2. Open index.html in your browser
 
-No build process or dependencies required! This is a simple static website that runs directly in the browser.
-
 ## Deployment
 
 This application can be deployed to any static web hosting service:
@@ -31,7 +29,6 @@ This application can be deployed to any static web hosting service:
 - GitHub Pages
 - Netlify
 - Any web server that can serve static files
-- You can view the deployed version of the application [here](https://mood-tracker-manya.netlify.app/).
 
 ## Screenshots
 
@@ -43,10 +40,6 @@ This application can be deployed to any static web hosting service:
 ![Calender View](./screenshots/sssets/Screenshot%202025-03-19%20at%2021.29.27.png)
 *Calender view displaying mood history*
 
-## Contributing
-
-Feel free to submit issues and enhancement requests!
-
-## License
-
-MIT
+## Deployment Link
+- You can view the deployed version of the application [here](https://mood-tracker-manya.netlify.app/).
+    
