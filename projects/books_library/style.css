@@ -1,0 +1,77 @@
+.book-card {
+    transition: transform 0.3s ease;
+    height: 100%;
+}
+
+.book-card:hover {
+    transform: translateY(-5px);
+}
+
+.book-card .card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+.list-view .book-card {
+    display: flex;
+    flex-direction: row;
+}
+
+.list-view .book-card .card-img-top {
+    width: 150px;
+    height: 200px;
+}
+
+.list-view .book-card .card-body {
+    flex: 1;
+}
+
+.grid-view .book-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.book-card .card-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.book-card .card-body .btn {
+    margin-top: auto;
+}
+
+.grid-view .book-card .card-img-top {
+    height: 250px;
+}
+
+.active-view {
+    background-color: var(--bs-primary) !important;
+    color: white !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .list-view .book-card {
+        flex-direction: column;
+    }
+
+    .list-view .book-card .card-img-top {
+        width: 100%;
+        height: 200px;
+    }
+}
+
+/* Loading animation */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}

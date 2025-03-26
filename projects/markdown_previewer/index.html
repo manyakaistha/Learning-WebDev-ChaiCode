@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown Previewer</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Highlight.js for code highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-light">
+    <div class="container-fluid py-4">
+        <header class="text-center mb-4">
+            <h1>Markdown Previewer</h1>
+            <button id="clearBtn" class="btn btn-secondary">Clear</button>
+        </header>
+
+        <div class="row">
+            <!-- Markdown Input -->
+            <div class="col-md-6 mb-4 mb-md-0">
+                <div class="card h-100">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="card-title mb-0">Markdown Input</h5>
+                    </div>
+                    <div class="card-body">
+                        <textarea id="markdownInput" class="form-control h-100" rows="20" placeholder="Enter your markdown here..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Preview Output -->
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-header bg-success text-white">
+                        <h5 class="card-title mb-0">Preview</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="preview" class="markdown-body"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Marked.js for markdown parsing -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <!-- Highlight.js for code highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <!-- Custom JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
